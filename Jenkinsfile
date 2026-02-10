@@ -1,30 +1,36 @@
 pipeline {
     agent any
 
+    tools {
+        maven 'Maven3'
+    }
+
     stages {
+
         stage('Checkout') {
             steps {
-                echo 'Cloning repository...'
+                echo 'Code checked out'
             }
         }
 
-        stage('Build') {
+        stage('Build & Test') {
             steps {
-                echo 'Building project...'
+                echo 'Running Maven Tests'
+                bat 'mvn clean test'
             }
         }
 
-        stage('Test') {
-            steps {
-                echo 'Running tests...'
-            }
-        }
+    }
 
-        stage('Deploy') {
-            steps {
-                echo 'Deploying application...'
-            }
+    post {
+        always {
+            echo 'Pipeline finished'
+        }
+        success {
+            echo 'Tests passed successfully'
+        }
+        failure {
+            echo 'Tests failed'
         }
     }
 }
-
