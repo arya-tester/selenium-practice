@@ -7,30 +7,21 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
+        stage('Build') {
             steps {
-                echo 'Code checked out'
-            }
-        }
-
-        stage('Build & Test') {
-            steps {
-                echo 'Running Maven Tests'
+                echo 'Running Maven Build'
                 bat 'mvn clean test'
             }
         }
-
     }
 
     post {
-        always {
-            echo 'Pipeline finished'
-        }
         success {
-            echo 'Tests passed successfully'
+            echo 'Build Successful ✅'
         }
+
         failure {
-            echo 'Tests failed'
+            echo 'Build Failed ❌'
         }
     }
 }
