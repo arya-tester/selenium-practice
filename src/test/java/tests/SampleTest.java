@@ -11,6 +11,7 @@ public class SampleTest {
 	public void openGoogle() {
 		driver.get("https://www.google.com/");
 		System.out.println("title is "+driver.getTitle());
+		System.out.println("Hi arya");
 		driver.quit();
 	}
 	
